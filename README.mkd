@@ -2,6 +2,12 @@
 Comparison of four Python implementations of the n choose k problem: *Choose randomly n elements in a list of k elements*.
 The distribution should be uniform: equiprobability is a necessary condition.
 
+## Repository
+-**plot.py:** plotting with matplotlib
+-**test.py:** launch benchmarks
+-**linear_choosen.py:** methods implementation
+-**results/:** images outputs
+
 ## Implemented methods
 The four following methods are implemented. The third one is the main interest of this repository.
 Further formal analysis of the method needs to be done.
@@ -10,10 +16,14 @@ Further formal analysis of the method needs to be done.
 The `random.sample` method do exactly the job. It automatically choose between two internal implementations,
 function to n. [Link to the doc](https://hg.python.org/cpython/file/3.5/Lib/random.py#l280).
 
+[Source](https://github.com/Aluriak/linear_choosens/blob/master/linear_choosens.py#L11).
+
 
 ### dumb
 The very obvious *mix it, then take the n firsts*.
-Very costly.
+[Very costly](https://github.com/Aluriak/linear_choosens#runtime-comparison).
+
+[Source](https://github.com/Aluriak/linear_choosens/blob/master/linear_choosens.py#L16).
 
 
 ### linear
@@ -30,23 +40,41 @@ is a comparison of a random number against a likelihood.
 The subset is consequently constructed during the walk of all elements.
 Eventually, all the k elements don't need to be walked, when the search is 0 choose k-i.
 
+[Source](https://github.com/Aluriak/linear_choosens/blob/master/linear_choosens.py#L31).
+
 
 ### (linear) recursive
 Purely recursive implementation of the linear algorithm.
 Slower, don't work on big dataset without modification of python stack size.
 
+[Source](https://github.com/Aluriak/linear_choosens/blob/master/linear_choosens.py#L65).
+
 
 ## Runtime comparison
 ![runtimes](results/runtime_100.png)
 The stdlib implementation is better when n is small, but the linear implementation
-seems to be quicker in other cases.
+is quicker in other cases.
 
 
 ## linear method distribution
 Following graphics don't show any obvious distribution bias between firsts and lasts elements.
-Further analysis of the data could highlight a bias.
-A mathematical proof of the approach remain the safest way to (in)validate the approach.
 
 ![runtimes](./results/benchmark_l_100_1000_100.png)
 
 ![runtimes](./results/benchmark_l_900_1000_100.png)
+
+These results are comparable to stdlib:
+
+![runtimes](./results/benchmark_s_100_1000_100.png)
+
+![runtimes](./results/benchmark_s_900_1000_100.png)
+
+And to the dumb method:
+
+![runtimes](./results/benchmark_d_100_1000_100.png)
+
+![runtimes](./results/benchmark_d_900_1000_100.png)
+
+
+Further analysis of the data could highlight a bias induced by the linear method.
+A mathematical proof of the approach remain the best way to (in)validate the approach.
