@@ -32,7 +32,8 @@ def plots(data:iter, title, dpi=400, savefile=False, show=True, xlabel='Elements
         plt.show()
 
 
-def plot_time(data, savefile=False, show=True, dpi=500):
+def plot_time(data, savefile=False, show=True, dpi=500,
+              nb_run=None, nb_method=None):
     for item in sorted(set(data.keys()) - {'rank'}):
         print(item + ':', data[item])
     print(data['rank'])
@@ -50,9 +51,9 @@ def plot_time(data, savefile=False, show=True, dpi=500):
         'xg-', 'og-',  # green  : stdlib method
     ]
 
-    title = ('Runtime measure for 10 runs of 3 methods\n'
+    title = ('Runtime measure for {} runs of {} methods\n'
              'function of the percentage of elements in the subset\n'
-             'with 100 or 1000 elements')
+             'with 100 or 1000 elements').format(nb_run, nb_method)
     plot = gx.plot(style=styles, title=title, figsize=(14.,10.))
     lines, labels = plot.get_legend_handles_labels()
 
