@@ -3,10 +3,10 @@ Comparison of four Python implementations of the n choose k problem: *Choose ran
 The distribution should be uniform: equiprobability is a necessary condition.
 
 ## Repository
--**plot.py:** plotting with matplotlib
--**test.py:** launch benchmarks
--**linear_choosen.py:** methods implementation
--**results/:** images outputs
+-**plot.py:** plotting with matplotlib  
+-**test.py:** launch benchmarks  
+-**linear_choosen.py:** methods implementation  
+-**results/:** images outputs  
 
 ## Implemented methods
 The four following methods are implemented. The third one is the main interest of this repository.
@@ -27,6 +27,8 @@ The very obvious *mix it, then take the n firsts*.
 
 
 ### linear
+**update:** this is the algorithm given in Knutt's *Seminumerical Algorithms*.
+
 This is an implementation proposal, that needs to be mathematically proven before any use.
 Its less efficient than stdlib when n is small, but notably quicker when n comes near k.
 
