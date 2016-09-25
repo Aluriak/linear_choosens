@@ -27,7 +27,8 @@ The very obvious *mix it, then take the n firsts*.
 
 
 ### linear
-This algorithm is detailed in Vitter paper *An Efficient Algorithm for Sequential Random Sampling*,
+This algorithm is detailed in [Vitter paper](http://www.ittc.ku.edu/~jsv/Papers/Vit87.RandomSampling.pdf)
+*An Efficient Algorithm for Sequential Random Sampling*,
 published in 1987, with the mathematical proof.
 You can also find it in Knutt's *Seminumerical Algorithms*.
 (source: Jon Bentley's *Programming Pearls*)
