@@ -27,9 +27,12 @@ The very obvious *mix it, then take the n firsts*.
 
 
 ### linear
-**update:** this is the algorithm given in Knutt's *Seminumerical Algorithms*.
+This algorithm is detailed in Vitter paper *An Efficient Algorithm for Sequential Random Sampling*,
+published in 1987, with the mathematical proof.
+You can also find it in Knutt's *Seminumerical Algorithms*.
+(source: Jon Bentley's *Programming Pearls*)
 
-This is an implementation proposal, that needs to be mathematically proven before any use.
+This is an implementation proposal, that could probably be improved.
 Its less efficient than stdlib when n is small, but notably quicker when n comes near k.
 
 The first element have a `n/k` likelihood to be in the output subset.
@@ -40,7 +43,7 @@ This method allows an O(1) complexity in memory, and a O(k) complexity in time (
 because elements are walked only once, and deciding whether an element is choosen or not
 is a comparison of a random number against a likelihood.
 The subset is consequently constructed during the walk of all elements.
-Eventually, all the k elements don't need to be walked, when the search is 0 choose k-i.
+All the k elements don't need to be walked, when the search is 0 choose k-i.
 
 [Source](https://github.com/Aluriak/linear_choosens/blob/master/linear_choosens.py#L31).
 
@@ -79,4 +82,5 @@ And to the dumb method:
 
 
 Further analysis of the data could highlight a bias induced by the linear method.
-A mathematical proof of the approach remain the best way to (in)validate the approach.
+If so, it is probably a bias of implementation (bad source code) or a random bias (bad random generator).
+The method itself is proven.
