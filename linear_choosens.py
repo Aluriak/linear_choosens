@@ -28,7 +28,7 @@ def choice_dumb(nb_choosen:int, it:iter, it_size=None, random=RANDOMIZER):
     return it[:nb_choosen]
 
 
-def choice_linear(nb_choosen:int, it:iter, it_size=None, random=RANDOMIZER):
+def choice_linear(nb_choosable:int, it:iter, it_size=None, random=RANDOMIZER):
     """Return a subset of iterable it, with a cardinal of n.
 
     Is performed in a O(|it|). For each element, the probability to found it
@@ -46,18 +46,18 @@ def choice_linear(nb_choosen:int, it:iter, it_size=None, random=RANDOMIZER):
         nb_elem = len(it)
     else:
         nb_elem = it_size
-    assert nb_choosen <= nb_elem
+    assert nb_choosable <= nb_elem
     random = random.random  # direct access to function
     # implementation
     for elem in it[:nb_elem]:
-        likelihood = nb_choosen / nb_elem  # modified later, depending of elem
-                                           # inclusion in the choosens set
+        likelihood = nb_choosable / nb_elem  # modified later, depending of elem
+                                             # inclusion in the choosens set
         assert 0 <= likelihood <= 1.
         if random() <= likelihood:
             choosens.add(elem)
-            nb_choosen -= 1
+            nb_choosable -= 1
         nb_elem -= 1
-        if nb_choosen == 0:  # no more element to choose
+        if nb_choosable == 0:  # no more element to choose
             break
     return choosens
 
