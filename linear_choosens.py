@@ -2,6 +2,7 @@
 
 import random
 from random import SystemRandom
+from itertools import islice
 
 
 RANDOMIZER = SystemRandom()  # the slower but less biased random
@@ -46,10 +47,11 @@ def choice_linear(nb_choosable:int, it:iter, it_size=None, random=RANDOMIZER):
         nb_elem = len(it)
     else:
         nb_elem = it_size
+    it = iter(it)
     assert nb_choosable <= nb_elem
     random = random.random  # direct access to function
     # implementation
-    for elem in it[:nb_elem]:
+    for elem in islice(it, 0, nb_elem):
         likelihood = nb_choosable / nb_elem  # modified later, depending of elem
                                              # inclusion in the choosens set
         assert 0 <= likelihood <= 1.
