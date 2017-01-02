@@ -2,6 +2,9 @@
 Comparison of four Python implementations of the n choose k problem: *Choose randomly n elements in a list of k elements*.
 The distribution should be uniform: equiprobability is a necessary condition.
 
+This works takes its roots from [this blog post](https://getkerf.wordpress.com/2016/03/30/the-best-algorithm-no-one-knows-about/),that explain both interests and history of the problem and its solutions.
+
+
 ## Repository
 -**plot.py:** plotting with matplotlib  
 -**test.py:** launch benchmarks  
