@@ -4,6 +4,18 @@ The distribution should be uniform: equiprobability is a necessary condition.
 
 This works takes its roots from [this blog post](https://getkerf.wordpress.com/2016/03/30/the-best-algorithm-no-one-knows-about/),that explain both interests and history of the problem and its solutions.
 
+## Notes on the linear implementation
+The complexity in time is linear, and constant in memory (if you do not save the choosen items).
+
+The linear implementation provides not only a performance boost compared to stdlib when the number of item is greater than 20 in the tests, but also a greater flexibility: you don't have to provides the full items in order to walk them, just their number.
+
+You can therefore choose N elements into a generator of K elements, without having to store the full generator
+or even the N elements if you treat them immediatly.
+
+The current implementation of linear_choosen implements these uses, and is a standalone ;
+you can therefore copy-paste it whereever you need it.
+
+
 
 ## Repository
 -**plot.py:** plotting with matplotlib  
