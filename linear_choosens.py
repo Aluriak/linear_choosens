@@ -41,12 +41,22 @@ def choice_linear(nb_choosable:int, it:iter, it_size=None, random=RANDOMIZER):
         (number of non-treated elements in it)
 
     """
+    return set(gen_choice_linear(nb_choosable, it, it_size, random))
+
+def gen_choice_linear(nb_choosable:int, it:iter, it_size=None, random=RANDOMIZER):
+    """Yield element of a subset of iterable it, with a cardinal of n.
+
+    Is performed in a O(|it|). For each element, the probability to found it
+    in the output subset is equal to:
+        (number of element in the subset) / (number of elements in it)
+
+    for the n-th element, the probability is equivalent to:
+        (number of element not already in the subset) /
+        (number of non-treated elements in it)
+
+    """
     # parameters treatment
-    choosens = set()  # set of the nb_choosen elements of it
-    if it_size is None:
-        nb_elem = len(it)
-    else:
-        nb_elem = it_size
+    nb_elem = len(it) if it_size is None else it_size
     it = iter(it)
     assert nb_choosable <= nb_elem
     random = random.random  # direct access to function
@@ -54,14 +64,19 @@ def choice_linear(nb_choosable:int, it:iter, it_size=None, random=RANDOMIZER):
     for elem in islice(it, 0, nb_elem):
         likelihood = nb_choosable / nb_elem  # modified later, depending of elem
                                              # inclusion in the choosens set
-        assert 0 <= likelihood <= 1.
+        # assert 0 <= likelihood <= 1.
         if random() <= likelihood:
-            choosens.add(elem)
+            yield elem
             nb_choosable -= 1
         nb_elem -= 1
         if nb_choosable == 0:  # no more element to choose
             break
-    return choosens
+        if nb_choosable == nb_elem:  # all remaining elements must be taken
+            # Note that a simple 'yield from it' can't be used,
+            #  since the input iterable may be a generator,
+            #  and the given it_size be smaller than reality.
+            yield from islice(it, 0, nb_choosable)
+            break
 
 
 def choice_rec(nb_choosen:int, it:iter, it_size=None, random=RANDOMIZER):
