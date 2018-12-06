@@ -18,10 +18,11 @@ you can therefore copy-paste it whereever you need it.
 
 
 ## Repository
--**plot.py:** plotting with matplotlib  
--**test.py:** launch benchmarks  
--**linear_choosen.py:** methods implementation  
--**results/:** images outputs  
+
+- **plot.py:** plotting with matplotlib
+- **test.py:** launch benchmarks
+- **linear_choosen.py:** methods implementation
+- **results/:** images outputs
 
 ## Implemented methods
 The four following methods are implemented. The third one is the main interest of this repository.
