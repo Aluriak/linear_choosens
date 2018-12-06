@@ -41,7 +41,10 @@ def choice_linear(nb_choosable:int, it:iter, it_size=None, random=RANDOMIZER):
         (number of non-treated elements in it)
 
     """
-    return set(gen_choice_linear(nb_choosable, it, it_size, random))
+    nb_elem = len(it) if it_size is None else it_size
+    if nb_choosable > nb_elem // 2:
+        return set(gen_revchoice_linear(nb_elem - nb_choosable, it, nb_elem, random))
+    return set(gen_choice_linear(nb_choosable, it, nb_elem, random))
 
 def gen_choice_linear(nb_choosable:int, it:iter, it_size=None, random=RANDOMIZER):
     """Yield element of a subset of iterable it, with a cardinal of n.
@@ -77,6 +80,33 @@ def gen_choice_linear(nb_choosable:int, it:iter, it_size=None, random=RANDOMIZER
             #  and the given it_size be smaller than reality.
             yield from islice(it, 0, nb_choosable)
             break
+
+
+def gen_revchoice_linear(nb_choosable:int, it:iter, it_size=None, random=RANDOMIZER):
+    """Yield element that are NOT in a subset of iterable it, with a cardinal of n.
+
+    It is basically equivalent to gen_choice_linear, but yield non-choosen
+    elements instead of the choosen one.
+
+    """
+    # parameters treatment
+    nb_elem = len(it) if it_size is None else it_size
+    it = iter(it)
+    assert nb_choosable <= nb_elem
+    random = random.random  # direct access to function
+    # implementation
+    for elem in islice(it, 0, nb_elem):
+        likelihood = nb_choosable / nb_elem  # modified later, depending of elem
+                                             # inclusion in the choosens set
+        if random() <= likelihood:
+            nb_choosable -= 1
+        else:
+            yield elem
+        nb_elem -= 1
+        # if nb_choosable == 0:  # no more element to choose
+            # NOTHING TO DO: how many elements must be yielded ?
+        if nb_choosable == nb_elem:  # all remaining elements belong to the subset
+            break  # ignore them all
 
 
 def choice_rec(nb_choosen:int, it:iter, it_size=None, random=RANDOMIZER):
